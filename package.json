@@ -2,6 +2,7 @@
   "name": "@theoabw/dsh-secret-prompt",
   "version": "0.1.0",
   "description": "prompt_secret tool for dsh: collect a secret from the user through a masked GUI field. The value is stored only in host memory and injected per-command as $DSH_SECRET_<handle>; the agent never sees the contents.",
+  "author": "Theo Wilenius <theo@tabw.dev>",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -23,6 +24,7 @@
   "engines": {
     "node": ">=22"
   },
+  "packageManager": "pnpm@11.23.0",
   "keywords": [
     "dsh",
     "deepseek-harness",
@@ -49,6 +51,9 @@
     "test": "node scripts/client-test.mjs && node scripts/smoke-test.mjs",
     "prepack": "tsdown"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^26.2.0",
@@ -62,9 +67,5 @@
     "typescript": "^6.0.3",
     "unrun": "^0.3.1"
   },
-  "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "Theo Wilenius <theo@tabw.dev>"
+  "private": false
 }
