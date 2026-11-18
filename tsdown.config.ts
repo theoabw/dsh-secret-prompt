@@ -1,5 +1,5 @@
 /**
- * tsdown build for @tabw/dsh-secret-prompt.
+ * tsdown build for @theoabw/dsh-secret-prompt.
  *
  * The node half (lib/index.js) is an ordinary ESM plugin the dsh host loader
  * imports; every @deepseek-ai/* import stays external and resolves from the
@@ -19,7 +19,7 @@ import { readFile } from 'node:fs/promises'
 import { defineConfig } from 'tsdown'
 import { transform } from 'lightningcss'
 
-const ID = '@tabw/dsh-secret-prompt'
+const ID = '@theoabw/dsh-secret-prompt'
 
 /** Module-table specifiers the browser half requests (seeded platform rows). */
 const CLIENT_EXTERNALS = new Set([

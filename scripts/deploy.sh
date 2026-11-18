@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build @tabw/dsh-secret-prompt, install it into the dsh web profile as a
+# Build @theoabw/dsh-secret-prompt, install it into the dsh web profile as a
 # file: dependency, ensure the loader entry exists in the profile patch, and
 # restart the web service. Idempotent: re-running rebuilds and refreshes
 # everything.
@@ -28,7 +28,7 @@ if ! grep -q 'id: secret-prompt' "$PATCH"; then
 # without exposing the value to the agent loop.
 - insert:
     - id: secret-prompt
-      name: '@tabw/dsh-secret-prompt'
+      name: '@theoabw/dsh-secret-prompt'
 EOF
   echo "added loader entry to $PATCH"
 else

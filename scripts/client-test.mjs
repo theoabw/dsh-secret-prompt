@@ -1,5 +1,5 @@
 /**
- * Browser-half test for @tabw/dsh-secret-prompt.
+ * Browser-half test for @theoabw/dsh-secret-prompt.
  *
  * Loads the BUILT lib/client.js through a stub `window.__ModuleLoader__`, so the
  * test exercises the shipped bundle rather than src: the composer's routing
@@ -31,7 +31,7 @@ let plugin = null
 globalThis.window = {
   __ModuleLoader__: {
     load({ id, factory }) {
-      assert.equal(id, '@tabw/dsh-secret-prompt')
+      assert.equal(id, '@theoabw/dsh-secret-prompt')
       plugin = factory((specifier) => {
         switch (specifier) {
           case 'react': return React

@@ -1,4 +1,4 @@
-# @tabw/dsh-secret-prompt
+# @theoabw/dsh-secret-prompt
 
 A dsh web plugin that adds a `prompt_secret` tool: the agent asks the user for a
 secret (password, API token, private key, ...) and the user types it into a
@@ -147,7 +147,7 @@ row below when it is missing, and restarts `dsh.service`:
 ```yaml
 - insert:
     - id: secret-prompt
-      name: '@tabw/dsh-secret-prompt'
+      name: '@theoabw/dsh-secret-prompt'
 ```
 
 The restart matters for the host half (`lib/index.js`), which is imported into
@@ -167,7 +167,7 @@ All options live in the `secret-prompt` loader entry in
 ```yaml
 - insert:
     - id: secret-prompt
-      name: '@tabw/dsh-secret-prompt'
+      name: '@theoabw/dsh-secret-prompt'
       config:
         ttlMinutes: 60            # IDLE minutes before a secret is forgotten (default 60)
         ttlRefreshOnUse: true     # using a secret restarts that window (default true)

@@ -1,5 +1,5 @@
 /**
- * @tabw/dsh-secret-prompt host half.
+ * @theoabw/dsh-secret-prompt host half.
  *
  * `prompt_secret` collects a secret from the human through a masked GUI field.
  * The value travels browser -> web server -> this plugin's in-memory store and

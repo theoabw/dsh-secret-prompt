@@ -1,5 +1,5 @@
 /**
- * @tabw/dsh-secret-prompt browser half: the `conversation.composer` chain entry
+ * @theoabw/dsh-secret-prompt browser half: the `conversation.composer` chain entry
  * that claims question cards whose questions all carry the `dsh-secret` header
  * marker, rendering masked password fields instead of the generic option list
  * (one field per question, so a batch collects several credentials in one

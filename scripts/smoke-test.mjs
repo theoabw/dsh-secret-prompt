@@ -1,5 +1,5 @@
 /**
- * Host-half smoke test for @tabw/dsh-secret-prompt.
+ * Host-half smoke test for @theoabw/dsh-secret-prompt.
  *
  * Loads the BUILT lib/index.js and drives its apply() against a minimal mock
  * cordis context: captures the registered tools, the shellEnv contributors,
