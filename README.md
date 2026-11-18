@@ -1,5 +1,7 @@
 # @theoabw/dsh-secret-prompt
 
+[![npm](https://img.shields.io/npm/v/@theoabw/dsh-secret-prompt?label=npm)](https://www.npmjs.com/package/@theoabw/dsh-secret-prompt)
+
 A dsh web plugin that adds a `prompt_secret` tool: the agent asks the user for a
 secret (password, API token, private key, ...) and the user types it into a
 **masked field in the GUI**. The value never reaches the agent:
@@ -25,15 +27,18 @@ The timer used to be armed once when a secret was collected and never moved, so 
 now restarts every time the value is handed to a command of the owning session, which makes
 `ttlMinutes` the time a secret survives WITHOUT BEING USED.
 
-The signal is coarser than "the command read the variable": the shell-env contributor is invoked for
-each command of that session, so a command that does not mention the variable also refreshes it. That
-is deliberate. Matching the command text for the variable name would expire a credential during a long
+The signal is coarser than "the command read the variable": the shell-env
+contributor is invoked for each command of that session, so a command that does
+not mention the variable also refreshes it. That is deliberate. Matching the
+command text for the variable name would expire a credential during a long
 stretch of work that happened not to name it, which is the failure this removes.
 
-`ttlRefreshOnUse: false` restores a fixed lifetime from collection, for a deployment that prefers a
-hard cap. The memory bound is then "no secret older than `ttlMinutes`"; with the refresh on it is "no
-secret that has been idle for `ttlMinutes`", which is the bound that matches when a secret is actually
-needed. A restart of the service still forgets everything immediately, because nothing touches disk.
+`ttlRefreshOnUse: false` restores a fixed lifetime from collection, for a
+deployment that prefers a hard cap. The memory bound is then "no secret older
+than `ttlMinutes`"; with the refresh on it is "no secret that has been idle for
+`ttlMinutes`", which is the bound that matches when a secret is actually needed.
+A restart of the service still forgets everything immediately, because nothing
+touches disk.
 
 ## Security model
 
