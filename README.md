@@ -132,17 +132,10 @@ Browser half (`src/client`):
 ## Install
 
 ```sh
-git clone https://github.com/theoabw/dsh-secret-prompt
-cd dsh-secret-prompt
-pnpm install
-bash scripts/link-deps.sh   # symlink the running dsh install's @deepseek-ai packages
-bash scripts/deploy.sh      # build, install into the profile, add the loader row, restart
+dsh plugin --profile web add @theoabw/dsh-secret-prompt
 ```
 
-`scripts/deploy.sh` targets the `web` profile by default; set `DSH_PROFILE`, and
-`DSH_HOME` if the harness home is not `~/.dsh`, for another profile. It builds
-both halves, installs the package as a `file:` dependency, appends the loader
-row below when it is missing, and restarts `dsh.service`:
+Then add the loader row to your profile patch (`~/.dsh/profiles/<profile>/cordis.patch.yml`):
 
 ```yaml
 - insert:
@@ -150,14 +143,24 @@ row below when it is missing, and restarts `dsh.service`:
       name: '@theoabw/dsh-secret-prompt'
 ```
 
-The restart matters for the host half (`lib/index.js`), which is imported into
-the running process. A rebuilt browser half reaches the page without one: the
-boot graph carries the bundle's content revision, so a page reload serves the
-new `lib/client.js`. Restarting ends live sessions, so do it when that is
-acceptable.
+The plugin has a host half and a browser bundle, so the restart that mounts the
+row is what makes both appear. Restarting ends live sessions, so do it when that
+is acceptable.
 
-`lib/` is build output and is not committed. `pnpm run build` produces it, and
-`pnpm test` expects it.
+### From a checkout
+
+```sh
+git clone https://github.com/theoabw/dsh-secret-prompt
+cd dsh-secret-prompt
+pnpm install
+bash scripts/link-deps.sh   # symlink the running dsh install's @deepseek-ai packages
+bash scripts/deploy.sh      # build, install as a file: dependency, add the row, restart
+```
+
+`scripts/deploy.sh` targets the `web` profile by default; set `DSH_PROFILE`, and
+`DSH_HOME` if the harness home is not `~/.dsh`, for another profile. `lib/` is
+build output and is not committed: `pnpm run build` produces it, and `pnpm test`
+expects it.
 
 ## Configuration
 
