@@ -1,0 +1,65 @@
+{
+  "name": "@tabw/dsh-secret-prompt",
+  "version": "0.1.0",
+  "description": "prompt_secret tool for dsh: collect a secret from the user through a masked GUI field. The value is stored only in host memory and injected per-command as $DSH_SECRET_<handle>; the agent never sees the contents.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "platform": "web"
+    }
+  },
+  "files": [
+    "lib"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "secrets",
+    "prompt",
+    "masked-input",
+    "agent"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theoabw/dsh-secret-prompt.git"
+  },
+  "homepage": "https://github.com/theoabw/dsh-secret-prompt#readme",
+  "bugs": {
+    "url": "https://github.com/theoabw/dsh-secret-prompt/issues"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "link-deps": "bash scripts/link-deps.sh",
+    "deploy": "bash scripts/deploy.sh",
+    "smoke-test": "node scripts/smoke-test.mjs",
+    "client-test": "node scripts/client-test.mjs",
+    "test": "node scripts/client-test.mjs && node scripts/smoke-test.mjs"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/react": "~18.3.1",
+    "@types/react-dom": "~18.3.0",
+    "clsx": "^2.1.1",
+    "lightningcss": "^1.33.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsdown": "^0.22.2",
+    "typescript": "^6.0.3",
+    "unrun": "^0.3.1"
+  },
+  "private": false
+}
