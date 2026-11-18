@@ -46,7 +46,8 @@
     "deploy": "bash scripts/deploy.sh",
     "smoke-test": "node scripts/smoke-test.mjs",
     "client-test": "node scripts/client-test.mjs",
-    "test": "node scripts/client-test.mjs && node scripts/smoke-test.mjs"
+    "test": "node scripts/client-test.mjs && node scripts/smoke-test.mjs",
+    "prepack": "tsdown"
   },
   "license": "MIT",
   "devDependencies": {
@@ -61,5 +62,8 @@
     "typescript": "^6.0.3",
     "unrun": "^0.3.1"
   },
-  "private": false
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }
