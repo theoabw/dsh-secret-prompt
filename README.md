@@ -2,6 +2,8 @@
 
 [![npm](https://img.shields.io/npm/v/@theoabw/dsh-secret-prompt?label=npm)](https://www.npmjs.com/package/@theoabw/dsh-secret-prompt)
 
+English | [中文](https://github.com/theoabw/dsh-secret-prompt/blob/main/README.zh.md)
+
 A dsh web plugin that adds a `prompt_secret` tool: the agent asks the user for a
 secret (password, API token, private key, ...) and the user types it into a
 **masked field in the GUI**. The value never reaches the agent:
