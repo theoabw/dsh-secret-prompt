@@ -4,6 +4,8 @@
 
 [English](https://github.com/theoabw/dsh-secret-prompt/blob/main/README.md) | 中文
 
+本文件是英文文档的翻译。若两者不一致，以英文版为准；`SECURITY.md` 与 `docs/` 中的安全说明只提供英文，以免翻译滞后带来错误陈述。
+
 一个 dsh web 插件，提供 `prompt_secret` 工具：Agent 向用户索要一个密钥（密码、
 API token、私钥等），用户把它输入到 **GUI 的掩码输入框**里。值不会到达 Agent：
 
