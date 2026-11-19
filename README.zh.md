@@ -21,7 +21,7 @@ API token、私钥等），用户把它输入到 **GUI 的掩码输入框**里�
 
 ## 空闲窗口，以及为什么它不是生命周期
 
-计时器原本在收集密钥时上弦一次、之后不动，于是比 `ttlMinutes` 更长的任务会在中途
+计时器原本只在收集密钥时设置一次、之后不再变动，于是比 `ttlMinutes` 更长的任务会在中途
 失去凭据，所有者不得不再次提供。现在，每当值被交给所属会话的某个命令时窗口就重新
 开始，因此 `ttlMinutes` 是密钥在**不被使用**的情况下能活多久。
 
@@ -49,7 +49,7 @@ API token、私钥等），用户把它输入到 **GUI 的掩码输入框**里�
 短于 `minRedactLength`（默认 4）的值刻意**不**脱敏，这样一个病态地短的密钥
 （比如单独一个横线）不会毁掉每条工具结果的可读性；真实的 token、密码和 PIN 至少
 4 个字符，仍然会被完整脱敏。达到或超过下限的值总是被脱敏，所以像 "card" 这样的
-4 字符密钥会把输出里每一处 "card" 抹掉，这是安全的失败方向。
+4 字符密钥会把输出里每一处 "card" 抹掉，宁可多脱敏，也不会漏掉真正的密钥。
 
 密钥从不落盘，因此 dsh 重启会立刻忘记一切。
 
@@ -81,17 +81,17 @@ API token、私钥等），用户把它输入到 **GUI 的掩码输入框**里�
 - 以 `priority: -20` 注册一个 `conversation.composer` 链条目，因此它先于通用的
   问题 composer（默认优先级 0）被尝试。链把 Session 的 `pendingInteraction` 交给
   每个条目，并保留第一个 `select` 返回非 null 的条目，所以
-  `selectSecretQuestion` 只在该问题里的**每一个**问题都带 `dsh-secret` header
-  时认领问题卡片。其他情况返回 `null`，由通用 composer 处理。
+  `selectSecretQuestion` 只在卡片中的**每一条**问题都带 `dsh-secret` header
+  时认领这张问题卡片。其他情况返回 `null`，由通用 composer 处理。
 - 渲染一张每个问题一个输入框的卡片，除非所有者揭示，否则输入是掩码的
   （`type="password"`）。揭示控件是带标签的按钮（`Show` / `Hide`、眼睛图标、
   `aria-pressed`），而不是无标签图标：值默认隐藏，显示是一次有意的点击。共享
   凭据逐字段掩码，卡片从不把值作为文本渲染，除非它已被揭示。
 - 通过卡片自己的通道回答（`card.answer({ answers })`、`card.dismiss()`），因此
-  宿主的 `ask()` 结算得与通用 composer 回答时完全一样。卡片是鸭子类型的
+  宿主的 `ask()` 落定方式与通用 composer 回答时完全一致。卡片是鸭子类型的
   （`kind`、`questions`、`answer`、`dismiss`），因为插件 bundle 不能依赖动态
-  client 包（模块表只播种平台行）；只读的 review 卡片永远不被认领：它重放一个
-  已结算调用的答案，而那些答案不能被重新提交。
+  client 包（模块表只预置平台行）；只读的 review 卡片永远不被认领：它重放一个
+  已落定调用的答案，而那些答案不能被重新提交。
 
 ## 目录结构
 
@@ -158,10 +158,10 @@ bash scripts/deploy.sh      # 构建、作为 file: 依赖安装、写入 loader
 
 升级 dsh 时有三处约定可能漂移，第一处已经漂移过：
 
-- `conversation.composer` 链的通货。到 dsh 0.2.1 为止，条目的 `select` 收到
+- `conversation.composer` 链的交互对象。到 dsh 0.2.1 为止，条目的 `select` 收到
   `{ interactions }`，匹配到的值是一个带 `payload.questions` 和
   `respond(decision)` 包装的临时载体。0.2.2 起，所有者 props 是
-  `{ sessionId, session, pendingInteraction }`，通货就是问题卡片本身
+  `{ sessionId, session, pendingInteraction }`，交互对象就是问题卡片本身
   （`questions`、`answer()`、`dismiss()`、`review`），崩溃的选择器会被当作拒绝
   吞掉，所以过期的插件会静默回退到不带掩码的通用问题卡片，而不是大声失败。
   `src/client/index.ts` 按已安装的 `ComposerChainProps` 为选择器定型，
