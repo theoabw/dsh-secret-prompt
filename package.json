@@ -1,6 +1,6 @@
 {
   "name": "@theoabw/dsh-secret-prompt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "prompt_secret tool for dsh: collect a secret from the user through a masked GUI field. The value is stored only in host memory and injected per-command as $DSH_SECRET_<handle>; the agent never sees the contents.",
   "author": "Theo Wilenius <theo@tabw.dev>",
   "type": "module",
